@@ -22,7 +22,7 @@ node {
         }
         stage ('Deploy in Testing Environment') {
             sh '''
-              . ./helm/helm-init.sh
+              . ./helm-init.sh
               helm install
             '''
         }
