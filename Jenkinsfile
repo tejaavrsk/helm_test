@@ -15,6 +15,7 @@ node {
             timeout(time: 1, unit: 'HOURS') {
                input message: "Does Pre-Production look good?"
             '''
+            }
         }
         stage ('Deploy in Prod Environment') {
             sh '''
