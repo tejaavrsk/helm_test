@@ -11,7 +11,7 @@ node {
         }
         stage ('Deploy in Testing Environment') {
             sh '''
-              sudo -H -u hekujen bash -c 'helm upgrade --install --namespace testing nginx . '
+              sudo -H -u hekujen bash -c 'helm upgrade --install --namespace testing testing . '
             '''  
             timeout(time: 1, unit: 'HOURS') {
                input message: "Does Pre-Production look good?"
@@ -19,7 +19,7 @@ node {
         }
         stage ('Deploy in Prod Environment') {
             sh '''
-              sudo -H -u hekujen bash -c 'helm upgrade --install --namespace production nginx . ' 
+              sudo -H -u hekujen bash -c 'helm upgrade --install --namespace production production . ' 
             '''
         }
     } catch (err) {

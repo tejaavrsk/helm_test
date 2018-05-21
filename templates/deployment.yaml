@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nginx-deployment
   labels:
-    release: ngnix
+    release: {{ .Release.Name }}
 spec:
   selector:
     matchLabels:
@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: nginx
-        release: ngnix
+        release: {{ .Release.Name }}
     spec:
       containers:
       - name: nginx
