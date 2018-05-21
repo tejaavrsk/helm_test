@@ -12,9 +12,9 @@ node {
         stage ('Deploy in Testing Environment') {
             sh '''
               sudo -H -u hekujen bash -c 'helm install . --namespace testing'
+            '''  
             timeout(time: 1, unit: 'HOURS') {
                input message: "Does Pre-Production look good?"
-            '''
             }
         }
         stage ('Deploy in Prod Environment') {
