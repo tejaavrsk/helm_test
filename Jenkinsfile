@@ -9,20 +9,16 @@ node {
         stage ('Build') {
                 git url: 'https://github.com/tejaavrsk/helm_test.git'
         }
-        stage ('Tests') {
-            parallel 'static': {
-                sh "whoami"
-            },
-            'unit': {
-                sh "pwd"
-            },
-            'integration': {
-                sh "echo 'shell scripts to run integration tests...'"
-            }
-        }
         stage ('Deploy in Testing Environment') {
             sh '''
-              sudo -H -u hekujen bash -c 'helm install .' 
+              sudo -H -u hekujen bash -c 'helm install . --namespace testing'
+            timeout(time: 1, unit: 'HOURS') {
+               input message: "Does Pre-Production look good?"
+            '''
+        }
+        stage ('Deploy in Prod Environment') {
+            sh '''
+              sudo -H -u hekujen bash -c 'helm install . --namespace production' 
             '''
         }
     } catch (err) {
