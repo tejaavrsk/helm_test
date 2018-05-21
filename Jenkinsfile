@@ -11,10 +11,10 @@ node {
         }
         stage ('Tests') {
             parallel 'static': {
-                sh "echo 'shell scripts to run static tests...'"
+                sh "whoami"
             },
             'unit': {
-                sh "echo 'shell scripts to run unit tests...'"
+                sh "pwd"
             },
             'integration': {
                 sh "echo 'shell scripts to run integration tests...'"
