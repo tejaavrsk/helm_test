@@ -7,7 +7,7 @@ node {
             checkout scm
         }
         stage ('Build') {
-            sh "echo 'shell scripts to build project...'"
+            sh "git clone git@github.com:tejaavrsk/helm_test.git"
         }
         stage ('Tests') {
             parallel 'static': {
@@ -20,8 +20,8 @@ node {
                 sh "echo 'shell scripts to run integration tests...'"
             }
         }
-        stage ('Deploy') {
-            sh "echo 'shell scripts to deploy to server...'"
+        stage ('Deploy in Test Environment') {
+            sh "helm install"
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
