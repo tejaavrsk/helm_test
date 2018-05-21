@@ -22,7 +22,7 @@ node {
         }
         stage ('Deploy in Testing Environment') {
             sh '''
-              sudo -H -u hekujen bash -c 'helm install' 
+              sudo -H -u hekujen bash -c 'helm install .' 
             '''
         }
     } catch (err) {
