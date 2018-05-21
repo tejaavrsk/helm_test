@@ -7,7 +7,9 @@ node {
             checkout scm
         }
         stage ('Build') {
-            sh "git clone git@github.com:tejaavrsk/helm_test.git"
+            steps {
+                git url: 'https://github.com/tejaavrsk/helm_test.git'
+            }
         }
         stage ('Tests') {
             parallel 'static': {
@@ -20,7 +22,7 @@ node {
                 sh "echo 'shell scripts to run integration tests...'"
             }
         }
-        stage ('Deploy in Test Environment') {
+        stage ('Deploy in Testing Environment') {
             sh "helm install"
         }
     } catch (err) {
