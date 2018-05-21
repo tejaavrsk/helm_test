@@ -21,7 +21,10 @@ node {
             }
         }
         stage ('Deploy in Testing Environment') {
-            sh "su -s /bin/bash -c '/usr/local/bin/helm install' hekujen"
+            sh '''
+              . ./helm/helm-init.sh
+              helm install
+            '''
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
