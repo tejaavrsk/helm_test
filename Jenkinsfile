@@ -7,9 +7,7 @@ node {
             checkout scm
         }
         stage ('Build') {
-            steps {
                 git url: 'https://github.com/tejaavrsk/helm_test.git'
-            }
         }
         stage ('Tests') {
             parallel 'static': {
