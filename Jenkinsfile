@@ -1,5 +1,5 @@
 pipeline {
-    // Clean workspace before doing anything
+    // Clean  workspace before doing anything
     agent any
     stages {
         stage ('Clone') {
