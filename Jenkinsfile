@@ -1,5 +1,6 @@
 pipeline {
     // Clean workspace before doing anything
+    deleteDir()
     agent any
     stages {
         stage ('Clone') {
@@ -30,7 +31,7 @@ pipeline {
                     sudo cp -Rp . /tmp/$CHARTNAME
                     cd /tmp/$CHARTNAME
                     sudo -H -u hekujen bash -c 'helm lint .'
-                    rm -f /tmp/$CHARTNAME
+                    rm -rf /tmp/$CHARTNAME
                   '''
               }
             }
