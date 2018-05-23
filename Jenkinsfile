@@ -9,6 +9,17 @@ node {
         stage ('Build') {
                 git url: 'https://github.com/tejaavrsk/helm_test.git'
         }
+        stage ('Tests') {
+            parallel 'Syntax Checks': {
+                sh "echo 'shell scripts to run static tests...'"
+            },
+            'Security Scans': {
+                sh "echo 'shell scripts to run Security Scans' "
+            },
+            'Helm Linting': {
+                sh "sudo -H -u hekujen bash -c 'helm lint . "
+            }
+        }
         stage ('Deploy in Testing Environment') {
             sh '''
               sudo -H -u hekujen bash -c 'helm upgrade --install --namespace testing helm-testing . '
