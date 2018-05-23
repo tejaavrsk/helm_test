@@ -18,7 +18,7 @@ node {
                 sh "echo 'shell scripts to run static tests...'"
             },
             'Security Scans': {
-                sh "echo 'shell scripts to run Security Scans' "
+                sh "echo ' $CHARTNAME shell scripts to run Security Scans' "
             },
             'Helm Linting': {
                 sh '''
