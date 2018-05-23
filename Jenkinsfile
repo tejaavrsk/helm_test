@@ -24,6 +24,7 @@ node {
                  mkdir /tmp/$CHART_NAME
                  cp -Rp . /tmp/CHART_NAME
                  "sudo -H -u hekujen bash -c 'helm lint /tmp/CHART_NAME'"
+                 rm -f /tmp/$CHART_NAME
                 '''
             }
         }
