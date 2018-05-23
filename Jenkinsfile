@@ -10,24 +10,24 @@ node {
                 git url: 'https://github.com/tejaavrsk/helm_test.git'
         }
         stage ('Tests') {
-          environment {
-            CHARTNAME = 'helm_test'
-          }
+            environment {
+                CHARTNAME = 'helm_test'
+            }
 
-          parallel 'Syntax Checks': {
-              sh "echo 'shell scripts to run static tests...'"
-          },
-          'Security Scans': {
-              sh "echo 'shell scripts to run Security Scans' "
-          },
-          'Helm Linting': {
-              sh '''
-                mkdir -p /tmp/$CHARTNAME
-                cp -Rp . /tmp/$CHARTNAME
-                sudo -H -u hekujen bash -c 'helm lint /tmp/$CHARTNAME'
-                rm -f /tmp/$CHARTNAME
-              '''
-          }
+            parallel 'Syntax Checks': {
+                sh "echo 'shell scripts to run static tests...'"
+            },
+            'Security Scans': {
+                sh "echo 'shell scripts to run Security Scans' "
+            },
+            'Helm Linting': {
+                sh '''
+                  mkdir -p /tmp/$CHARTNAME
+                  cp -Rp . /tmp/$CHARTNAME
+                  sudo -H -u hekujen bash -c 'helm lint /tmp/$CHARTNAME'
+                  rm -f /tmp/$CHARTNAME
+                '''
+            }
         }
         stage ('Deploy in Testing Environment') {
             sh '''
