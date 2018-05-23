@@ -17,7 +17,7 @@ node {
                 sh "echo 'shell scripts to run Security Scans' "
             },
             'Helm Linting': {
-                sh "sudo -H -u hekujen bash -c 'helm lint . "
+                sh "sudo -H -u hekujen bash -c 'helm lint .'"
             }
         }
         stage ('Deploy in Testing Environment') {
