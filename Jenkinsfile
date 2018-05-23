@@ -12,6 +12,7 @@ node {
         stage ('Tests') {
           environment {
           CHART_NAME = 'helm_test'
+          }
             parallel 'Syntax Checks': {
                 sh "echo 'shell scripts to run static tests...'"
             },
