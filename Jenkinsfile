@@ -11,7 +11,7 @@ node {
         }
         stage ('Tests') {
           environment {
-            CHART_NAME = 'helm_test'
+            CHARTNAME = 'helm_test'
           }
 
           parallel 'Syntax Checks': {
@@ -22,10 +22,10 @@ node {
           },
           'Helm Linting': {
               sh '''
-                mkdir -p /tmp/$CHART_NAME
-                cp -Rp . /tmp/$CHART_NAME
-                "sudo -H -u hekujen bash -c 'helm lint /tmp/$CHART_NAME'"
-                rm -f /tmp/$CHART_NAME
+                mkdir -p /tmp/$CHARTNAME
+                cp -Rp . /tmp/$CHARTNAME
+                sudo -H -u hekujen bash -c 'helm lint /tmp/$CHARTNAME'
+                rm -f /tmp/$CHARTNAME
               '''
           }
         }
