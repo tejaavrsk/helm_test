@@ -1,8 +1,6 @@
 pipeline {
     // Clean workspace before doing anything
     agent any
-
-    try {
         stage ('Clone') {
             checkout scm
         }
@@ -42,8 +40,4 @@ pipeline {
               sudo -H -u hekujen bash -c 'helm upgrade --install --namespace production helm-prod . ' 
             '''
         }
-    } catch (err) {
-        currentBuild.result = 'FAILED'
-        throw err
-    }
 }
