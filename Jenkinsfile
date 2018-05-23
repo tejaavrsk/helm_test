@@ -20,8 +20,9 @@ node {
                 sh "echo 'shell scripts to run Security Scans' "
             },
             'Helm Linting': {
-                sh '''                  
-                 mkdir -p /tmp/$CHART_NAME
+                sh '''
+                 cd /tmp                  
+                 mkdir -p $CHART_NAME
                  cp -Rp . /tmp/$CHART_NAME
                  "sudo -H -u hekujen bash -c 'helm lint /tmp/$CHART_NAME'"
                  rm -f /tmp/$CHART_NAME
