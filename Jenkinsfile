@@ -11,8 +11,9 @@ node {
         }
         stage ('Tests') {
           environment {
-          CHART_NAME = 'helm_test'
+            CHART_NAME = 'helm_test'
           }
+
           parallel 'Syntax Checks': {
               sh "echo 'shell scripts to run static tests...'"
           },
@@ -21,8 +22,7 @@ node {
           },
           'Helm Linting': {
               sh '''
-                cd /tmp                  
-                mkdir -p $CHART_NAME
+                mkdir -p /tmp/$CHART_NAME
                 cp -Rp . /tmp/$CHART_NAME
                 "sudo -H -u hekujen bash -c 'helm lint /tmp/$CHART_NAME'"
                 rm -f /tmp/$CHART_NAME
