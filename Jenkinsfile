@@ -27,7 +27,7 @@ pipeline {
                   sh '''
                     CHARTNAME=`grep name Chart.yaml  | awk '{print $2}'`
                     mkdir -p /tmp/$CHARTNAME
-                    cp -Rp . /tmp/$CHARTNAME
+                    sudo cp -Rp . /tmp/$CHARTNAME
                     sudo -H -u hekujen bash -c 'helm lint /tmp/$CHARTNAME'
                     rm -f /tmp/$CHARTNAME
                   '''
