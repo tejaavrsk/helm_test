@@ -10,6 +10,8 @@ node {
                 git url: 'https://github.com/tejaavrsk/helm_test.git'
         }
         stage ('Tests') {
+          environment {
+          CHART_NAME = 'helm_test'
             parallel 'Syntax Checks': {
                 sh "echo 'shell scripts to run static tests...'"
             },
@@ -17,7 +19,11 @@ node {
                 sh "echo 'shell scripts to run Security Scans' "
             },
             'Helm Linting': {
-                sh "sudo -H -u hekujen bash -c 'helm lint .'"
+                sh ''' 
+                 mkdir /tmp/$CHART_NAME
+                 cp -Rp . /tmp/CHART_NAME
+                 "sudo -H -u hekujen bash -c 'helm lint /tmp/CHART_NAME'"
+                '''
             }
         }
         stage ('Deploy in Testing Environment') {
